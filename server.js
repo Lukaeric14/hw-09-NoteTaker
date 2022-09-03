@@ -31,12 +31,7 @@ app.post('/api/notes', (req, res) => {
         id: uuidv4(),
     };
 
-    readAndAppend(note,'./db/db.json');
-    res.json('Note Added');
-} else {
-    res.json('Error');
-  }
   console.log(req.body);
-})
+}});
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
