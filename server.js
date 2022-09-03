@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const db = require('../db/db.json');
 const { v4: uuidv4 } = require('uuid');
 
 const PORT = process.env.PORT || 3001;
@@ -30,8 +31,23 @@ app.post('/api/notes', (req, res) => {
         text,
         id: uuidv4(),
     };
-
   console.log(req.body);
-}});
+
+  db.push(note);
+
+  fs.writeFileSync('./db/db.json', JSON.stringify(db, null, 4))
+
+  const response = {
+    status: 'success',
+    body: newNote,
+  };
+
+
+  res.json(response)
+} else {
+  res.json('Error in posting feedback');
+}
+
+});
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
