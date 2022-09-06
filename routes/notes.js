@@ -26,25 +26,12 @@ notes.post('/', (req, res) => {
 notes.delete('/:id', (req, res) => {
 
     const Id = req.params.id;
-
     db.splice(Id - 1,1);
-
-    db.forEach((obj, i) => {
-        
-      obj.id = i + 1;
-    });
+    obj.id = i + 1;
 
     fs.writeFileSync('./db/db.json', JSON.stringify(newData, null, 4), function () {
       res.json(`${id}`);
     });
-
-    const response = {
-      status: 'success',
-      body: newData,
-    };
-
-    console.log(response);
-  
 });
   
 
